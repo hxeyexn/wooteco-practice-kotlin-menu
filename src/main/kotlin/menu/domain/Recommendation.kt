@@ -5,7 +5,9 @@ import menu.domain.menu.Categories
 
 class Recommendation {
 
-    fun choiceCategory(): List<String>  {
+    private lateinit var menus: List<String>
+
+    fun choiceCategory(): List<String> {
         val categories = mutableListOf<String>()
 
         do {
@@ -18,4 +20,32 @@ class Recommendation {
         return categories
     }
 
+    fun choiceMenu(categories: List<String>): List<String> {
+        val categoriesType = Categories.entries.map { it.type }
+        val choiceMenus = mutableListOf<String>()
+
+        categories.forEach { category ->
+            menus = when (category) {
+                categoriesType[JAPANESE_TYPE] -> Categories.JAPANESE.menu.map { it }
+                categoriesType[KOREAN_TYPE] -> Categories.KOREAN.menu.map { it }
+                categoriesType[CHINESE_TYPE] -> Categories.CHINESE.menu.map { it }
+                categoriesType[ASIAN_TYPE] -> Categories.ASIAN.menu.map { it }
+                categoriesType[WESTERN_TYPE] -> Categories.WESTERN.menu.map { it }
+                else -> listOf("")
+            }
+            val menu = Randoms.shuffle(menus)[0]
+            choiceMenus.add(menu)
+        }
+
+        return choiceMenus
+    }
+
+    companion object {
+        const val JAPANESE_TYPE = 0
+        const val KOREAN_TYPE = 1
+        const val CHINESE_TYPE = 2
+        const val ASIAN_TYPE = 3
+        const val WESTERN_TYPE = 4
+    }
+    
 }
