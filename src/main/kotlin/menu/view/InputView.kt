@@ -1,6 +1,7 @@
 package menu.view
 
 import camp.nextstep.edu.missionutils.Console
+import menu.domain.NonIntake
 import menu.domain.coach.Coaches
 
 class InputView {
@@ -13,6 +14,7 @@ class InputView {
 
     fun readNonIntake(): String {
         val nonIntake = Console.readLine()
+        NonIntake(nonIntake)
         return nonIntake
     }
 }

@@ -30,8 +30,17 @@ class Service(
 
         coaches.forEach {
             outputView.printRequestInputNonIntake(it.name)
-            inputView.readNonIntake()
+
+            while (true) {
+                try {
+                    inputView.readNonIntake()
+                    break
+                } catch (e: IllegalArgumentException) {
+                    outputView.printError(e.message)
+                }
+            }
         }
+
     }
 
 }
