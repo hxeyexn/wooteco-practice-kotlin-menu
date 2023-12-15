@@ -19,7 +19,12 @@ class Service(
 
     fun start() {
         outputView.printStartService()
+        fetchCoachName()
+        fetchNonIntake()
+        showServiceEnd()
+    }
 
+    private fun fetchCoachName() {
         outputView.printRequestInputCoach()
 
         while (true) {
@@ -31,7 +36,9 @@ class Service(
                 outputView.printError(e.message)
             }
         }
+    }
 
+    private fun fetchNonIntake() {
         coaches.forEach {
             outputView.printRequestInputNonIntake(it.name)
 
@@ -45,8 +52,6 @@ class Service(
                 }
             }
         }
-
-        showServiceEnd()
     }
 
     private fun showServiceEnd() {
