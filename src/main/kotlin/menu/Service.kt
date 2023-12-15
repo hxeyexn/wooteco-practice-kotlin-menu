@@ -8,6 +8,7 @@ class Service(
 
     fun start() {
         outputView.printStartService()
+        outputView.printRequestInputCoach()
     }
 
 }
