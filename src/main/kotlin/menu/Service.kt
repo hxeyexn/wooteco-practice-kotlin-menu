@@ -1,17 +1,21 @@
 package menu
 
+import menu.domain.Recommendation
 import menu.domain.coach.Coach
 import menu.view.InputView
 import menu.view.OutputView
-import kotlin.IllegalArgumentException
 
 class Service(
     private val outputView: OutputView,
     private val inputView: InputView,
 ) {
 
+    private val recommendation = Recommendation()
+
     private var coachesInput = ""
     private lateinit var coaches: List<Coach>
+    private var nonIntakeInput = ""
+    private var nonIntake = mutableMapOf<String, List<String>>()
 
     fun start() {
         outputView.printStartService()
@@ -33,7 +37,8 @@ class Service(
 
             while (true) {
                 try {
-                    inputView.readNonIntake()
+                    nonIntakeInput = inputView.readNonIntake()
+                    nonIntake[it.name] = nonIntakeInput.split(",")
                     break
                 } catch (e: IllegalArgumentException) {
                     outputView.printError(e.message)
@@ -41,6 +46,20 @@ class Service(
             }
         }
 
+        showServiceEnd()
+    }
+
+    private fun showServiceEnd() {
+        outputView.printResultServiceHeadLine()
+        val categories = recommendation.choiceCategory()
+        outputView.printCategory(categories)
+
+        nonIntake.forEach { (coach, nonIntakeFood) ->
+            val recommendMenu = recommendation.choiceMenu(categories, nonIntakeFood)
+            outputView.printRecommendMenu(coach, recommendMenu)
+        }
+
+        outputView.printServiceEnd()
     }
 
 }
