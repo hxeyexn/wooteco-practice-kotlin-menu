@@ -1,6 +1,6 @@
 package menu.domain
 
-import menu.domain.menu.MenuCategory
+import menu.domain.menu.Categories
 
 class NonIntake(
     private val nonIntake: String,
@@ -17,11 +17,11 @@ class NonIntake(
 
     private fun haveMenu(): Boolean {
         val menu = mutableListOf<String>()
-        MenuCategory.JAPANESE.menu.map { menu.add(it) }
-        MenuCategory.ASIAN.menu.map { menu.add(it) }
-        MenuCategory.CHINESE.menu.map { menu.add(it) }
-        MenuCategory.KOREAN.menu.map { menu.add(it) }
-        MenuCategory.WESTERN.menu.map { menu.add(it) }
+        Categories.JAPANESE.menu.map { menu.add(it) }
+        Categories.ASIAN.menu.map { menu.add(it) }
+        Categories.CHINESE.menu.map { menu.add(it) }
+        Categories.KOREAN.menu.map { menu.add(it) }
+        Categories.WESTERN.menu.map { menu.add(it) }
 
         val menuOrNot = nonIntake.split(",").all {
             menu.contains(it)
