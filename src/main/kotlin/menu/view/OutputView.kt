@@ -14,4 +14,8 @@ class OutputView {
         println("\n$error")
     }
 
+    fun printRequestInputNonIntake(name: String) {
+        println("\n$name(이)가 못 먹는 메뉴를 입력해 주세요.")
+    }
+
 }

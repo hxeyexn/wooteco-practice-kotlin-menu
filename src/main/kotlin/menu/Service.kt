@@ -3,26 +3,33 @@ package menu
 import menu.domain.coach.Coach
 import menu.view.InputView
 import menu.view.OutputView
-import java.lang.IllegalArgumentException
+import kotlin.IllegalArgumentException
 
 class Service(
     private val outputView: OutputView,
     private val inputView: InputView,
 ) {
 
-    private var coaches = ""
+    private var coachesInput = ""
+    private lateinit var coaches: List<Coach>
+
     fun start() {
         outputView.printStartService()
 
         outputView.printRequestInputCoach()
+
         while (true) {
             try {
-                coaches = inputView.readCoaches()
-                coaches.split(",").forEach { Coach(it) }
+                coachesInput = inputView.readCoaches()
+                coaches = coachesInput.split(",").map { Coach(it) }
                 break
             } catch (e: IllegalArgumentException) {
                 outputView.printError(e.message)
             }
+        }
+
+        coaches.forEach {
+            outputView.printRequestInputNonIntake(it.name)
         }
     }
 

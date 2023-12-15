@@ -1,7 +1,7 @@
 package menu.domain.coach
 
 class Coach(
-    private val name: String,
+    val name: String,
 ) {
 
     init {
