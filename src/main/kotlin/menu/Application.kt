@@ -1,5 +1,9 @@
 package menu
 
-fun main() {
+import menu.view.OutputView
 
+fun main() {
+    val outputView = OutputView()
+
+    Service(outputView).start()
 }
