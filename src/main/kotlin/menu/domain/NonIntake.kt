@@ -23,9 +23,11 @@ class NonIntake(
         MenuCategory.KOREAN.menu.map { menu.add(it) }
         MenuCategory.WESTERN.menu.map { menu.add(it) }
 
-        return nonIntake.split(",").all {
+        val menuOrNot = nonIntake.split(",").all {
             menu.contains(it)
         }
+
+        return menuOrNot || nonIntake.isEmpty()
     }
 
     companion object {
