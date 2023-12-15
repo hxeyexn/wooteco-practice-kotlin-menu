@@ -30,6 +30,7 @@ class Service(
 
         coaches.forEach {
             outputView.printRequestInputNonIntake(it.name)
+            inputView.readNonIntake()
         }
     }
 

@@ -11,4 +11,8 @@ class InputView {
         return coaches
     }
 
+    fun readNonIntake(): String {
+        val nonIntake = Console.readLine()
+        return nonIntake
+    }
 }
