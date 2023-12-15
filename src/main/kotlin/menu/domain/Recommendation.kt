@@ -20,7 +20,7 @@ class Recommendation {
         return categories
     }
 
-    fun choiceMenu(categories: List<String>): List<String> {
+    fun choiceMenu(categories: List<String>, nonIntake: List<String>): List<String> {
         val categoriesType = Categories.entries.map { it.type }
         val choiceMenus = mutableListOf<String>()
 
@@ -34,7 +34,10 @@ class Recommendation {
                 else -> listOf("")
             }
             val menu = Randoms.shuffle(menus)[0]
-            choiceMenus.add(menu)
+
+            if (!nonIntake.contains(menu) || !choiceMenus.contains(menu)) {
+                choiceMenus.add(menu)
+            }
         }
 
         return choiceMenus
@@ -47,5 +50,5 @@ class Recommendation {
         const val ASIAN_TYPE = 3
         const val WESTERN_TYPE = 4
     }
-    
+
 }
